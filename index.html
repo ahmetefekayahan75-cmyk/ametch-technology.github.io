@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Ametch Technology</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --bg:#0f172a;
+  --text:#fff;
+  --card:#1e293b;
+}
+.light{
+  --bg:#f8fafc;
+  --text:#020617;
+  --card:#e5e7eb;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:.3s;
+}
+
+/* TOP BAR */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 20px;
+  background:#020617;
+  position:fixed;
+  width:100%;
+  top:0;
+  z-index:10;
+}
+
+.menu-btn{
+  font-size:26px;
+  cursor:pointer;
+}
+
+.right{
+  display:flex;
+  gap:15px;
+  align-items:center;
+}
+
+button{
+  cursor:pointer;
+  padding:6px 10px;
+  border:none;
+  border-radius:6px;
+}
+
+/* SIDE MENU */
+nav{
+  position:fixed;
+  left:-250px;
+  top:0;
+  width:250px;
+  height:100%;
+  background:#020617;
+  padding-top:70px;
+  transition:.3s;
+}
+nav a{
+  display:block;
+  padding:15px;
+  color:white;
+  text-decoration:none;
+}
+nav a:hover{background:#1e293b}
+
+/* CONTENT */
+main{
+  padding-top:90px;
+  text-align:center;
+}
+
+/* SLIDER */
+.slider{
+  background:var(--card);
+  margin:30px auto;
+  width:80%;
+  padding:30px;
+  border-radius:12px;
+  font-size:20px;
+}
+
+/* SECTIONS */
+.section{
+  display:none;
+  max-width:800px;
+  margin:30px auto;
+}
+.section.active{display:block}
+
+.card{
+  background:var(--card);
+  padding:20px;
+  margin:15px;
+  border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <h3>Ametch Technology</h3>
+  <div class="right">
+    <button onclick="login()">Giriş Yap</button>
+    <button onclick="register()">Kayıt Ol</button>
+    <button onclick="toggleTheme()">🌗</button>
+  </div>
+</header>
+
+<nav id="menu">
+  <a onclick="show('home')">Ana Sayfa</a>
+  <a onclick="show('projects')">Projeler</a>
+  <a onclick="show('about')">Hakkında</a>
+  <a onclick="show('news')">Haberler</a>
+</nav>
+
+<main>
+
+<div id="home" class="section active">
+  <div class="slider" id="slider"></div>
+</div>
+
+<div id="projects" class="section">
+  <div class="card">🐍 Python Ağ Analiz Aracı</div>
+  <div class="card">🔐 Güvenlik Tarama Uygulaması</div>
+  <div class="card">📊 Sistem İzleme Aracı</div>
+</div>
+
+<div id="about" class="section">
+  <div class="card">
+    <h2>Ametch Technology</h2>
+    <p>
+      Ametch Technology, Ahmet Efe Kayahan’a ait bir teknoloji topluluğudur.
+      Açık kaynak, güvenlik ve yenilikçi yazılımlara önem verir.
+      Siz de bu değerlere sahipseniz Ametch Technology’ye destek olun.
+    </p>
+  </div>
+</div>
+
+<div id="news" class="section">
+  <div class="card">📰 Yapay zeka yeni çip mimarileriyle hız kazanıyor</div>
+  <div class="card">📰 Açık kaynak projelere ilgi rekor seviyede</div>
+  <div class="card">📰 Siber güvenlikte yeni tehditler ortaya çıktı</div>
+</div>
+
+</main>
+
+<script>
+/* MENU */
+function toggleMenu(){
+  const m=document.getElementById("menu");
+  m.style.left = m.style.left==="0px" ? "-250px" : "0px";
+}
+
+/* PAGE SWITCH */
+function show(id){
+  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  toggleMenu();
+}
+
+/* THEME */
+function toggleTheme(){
+  document.body.classList.toggle("light");
+}
+
+/* SLIDER */
+const news=[
+ "📰 Yapay zeka yazılım dünyasını dönüştürüyor",
+ "🔐 Siber güvenlik artık her zamankinden önemli",
+ "🌐 Açık kaynak projeler büyümeye devam ediyor"
+];
+let i=0;
+const slider=document.getElementById("slider");
+slider.innerText=news[0];
+setInterval(()=>{
+  i=(i+1)%news.length;
+  slider.innerText=news[i];
+},5000);
+
+/* AUTH (DEMO) */
+function login(){
+  alert("Firebase / Google Auth bağlanabilir.");
+}
+function register(){
+  alert("Apple & Google giriş sistemi eklenebilir.");
+}
+</script>
+
+</body>
+</html>
